@@ -12,12 +12,14 @@ public class LevelMenu : MonoBehaviour
     {
         int unlockedLevel = PlayerPrefs.GetInt("unlockedLevel", 1);
 
+        // Disable all buttons first
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].interactable = false;
         }
 
-        for (int i = 0; i < unlockedLevel; i++)
+        // Enable buttons up to unlockedLevel, but don't exceed array length
+        for (int i = 0; i < unlockedLevel && i < buttons.Length; i++)
         {
             buttons[i].interactable = true;
         }
@@ -25,7 +27,7 @@ public class LevelMenu : MonoBehaviour
 
     public void OpenLevel(int levelId)
     {
-        string levelName = "Level" + levelId;
+        string levelName = "Level " + levelId;
         SceneManager.LoadScene(levelName);
     }
 }
